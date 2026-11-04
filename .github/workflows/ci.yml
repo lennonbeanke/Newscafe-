@@ -1,0 +1,45 @@
+# Continuous checks only. There is NO deployment, NO publishing and NO secret in this workflow.
+# It does nothing until the repository is pushed (which needs the owner's approval).
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  repo-safety:
+    name: Repository safety (allow-list, PDFs, secrets)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: scripts/check-repo.sh --tracked
+      - run: scripts/scan-secrets.sh --tracked
+
+  frontend:
+    name: Frontend lint and type-check
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npx tsc --noEmit
+
+  database:
+    name: Database migrations and tests (fake data, throw-away container)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: scripts/db-up.sh
+      - run: scripts/db-test.sh

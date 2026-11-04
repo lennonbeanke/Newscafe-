@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Local safety net (activated with: git config core.hooksPath scripts/githooks). Cannot be skipped silently.
+set -euo pipefail
+TOP="$(git rev-parse --show-toplevel)"
+"$TOP/scripts/check-repo.sh"
+"$TOP/scripts/scan-secrets.sh"

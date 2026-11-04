@@ -1,0 +1,52 @@
+# DRAFT, not implemented. Describes the planned public booking API (see docs/API.md).
+openapi: 3.1.0
+info:
+  title: News Cafe API (draft)
+  version: 0.0.1-draft
+servers:
+  - url: https://example.invalid        # placeholder; no real server exists
+paths:
+  /api/health:
+    get:
+      summary: Is online booking usable right now?
+      responses:
+        "200": { description: Booking service available }
+        "503": { description: Use the email-request fallback }
+  /api/availability:
+    get:
+      summary: Slots and alternatives for a date and party size
+      parameters:
+        - { name: date,  in: query, required: true, schema: { type: string, format: date } }
+        - { name: party, in: query, required: true, schema: { type: integer, minimum: 1 } }
+      responses:
+        "200": { description: Available start times (empty when booking rules are not configured) }
+        "503": { description: Fallback to email request }
+  /api/reservations:
+    post:
+      summary: Request a reservation
+      parameters:
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [party, startsAt, name, consent]
+              properties:
+                party:    { type: integer, minimum: 1 }
+                startsAt: { type: string, format: date-time }
+                name:     { type: string, maxLength: 120 }
+                email:    { type: string, format: email }
+                phone:    { type: string, maxLength: 30 }
+                notes:    { type: string, maxLength: 500 }
+                consent:  { type: boolean, const: true }
+      responses:
+        "201": { description: "Saved. status is pending or confirmed; confirmed only if the owner enabled auto-confirm" }
+        "409": { description: No suitable table; alternatives are returned }
+        "422": { description: Rule violation (party size, notice, hours, slot, consent) }
+        "503": { description: "Database unavailable; fallback=request (never a confirmation)" }
+  /api/contact:
+    post: { summary: Contact enquiry, responses: { "201": { description: Stored } } }
+  /api/function-enquiries:
+    post: { summary: Function or event enquiry, responses: { "201": { description: Stored } } }

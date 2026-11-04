@@ -1,0 +1,52 @@
+# News Cafe: allow-list .gitignore
+# Everything at the repository root is ignored unless it is listed below.
+# Approved by the owner: frontend/, database/, scripts/, docs/, .github/workflows/ci.yml,
+# plus .gitignore, .gitattributes and README.md.
+/*
+!/.gitignore
+!/.gitattributes
+!/README.md
+!/frontend/
+!/database/
+!/scripts/
+!/docs/
+!/.github/
+
+# Inside .github only the CI workflow is allowed.
+/.github/*
+!/.github/workflows/
+/.github/workflows/*
+!/.github/workflows/ci.yml
+
+# ---- Never tracked, anywhere (applies inside the allowed folders too) ----
+# Original menu PDFs and other source documents
+*.pdf
+# Secrets and environment files (an empty .env.example is allowed)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+id_rsa*
+# Database dumps, encrypted backups, local backup folders
+*.dump
+*.bak
+*.age
+*.sql.gz
+*.sql.age
+/database/backups/
+backups/
+# Dependencies, build output, caches, OS files
+node_modules/
+.next/
+out/
+build/
+coverage/
+.vercel/
+.wrangler/
+*.tsbuildinfo
+.DS_Store
+*.log
