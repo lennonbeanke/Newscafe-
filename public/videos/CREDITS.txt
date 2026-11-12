@@ -1,0 +1,8 @@
+hero.mp4 / hero-poster.jpg
+--------------------------
+Derived from "Experimental cocktail in the bar" (Mixkit item #4416), colour-graded and trimmed.
+Licensed under the Mixkit Stock Video Free License (free for commercial use, no attribution required):
+https://mixkit.co/license/#videoFree
+
+To use your own footage: replace hero.mp4 (H.264, 1280x720, 10-15s, <3 MB, no audio, faststart)
+and hero-poster.jpg (a representative frame, ~1920px wide). Path is set in lib/site.ts.
