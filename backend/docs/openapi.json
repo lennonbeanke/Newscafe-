@@ -1,0 +1,442 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "News Cafe API",
+    "version": "0.1.0",
+    "description": "Milestone A2 (local development only). Public endpoints: health, availability, booking request. If the database cannot be reached, booking endpoints answer 503 with `fallback: \"request\"`; a booking is never reported as saved unless it was committed. Owner (admin) endpoints are added in the next checkpoint."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8787",
+      "description": "Local development"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Health": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok"
+            ]
+          },
+          "booking": {
+            "type": "string",
+            "enum": [
+              "available",
+              "request_only"
+            ]
+          }
+        },
+        "required": [
+          "status",
+          "booking"
+        ]
+      },
+      "Availability": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "party": {
+            "type": "integer"
+          },
+          "slots": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Start instants (UTC, ISO 8601) a guest could book."
+          }
+        },
+        "required": [
+          "date",
+          "party",
+          "slots"
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "request_id": {
+            "type": "string"
+          },
+          "fallback": {
+            "type": "string",
+            "enum": [
+              "request"
+            ]
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "unknown"
+            ]
+          },
+          "retry_with_same_key": {
+            "type": "boolean"
+          },
+          "contact": {
+            "type": "object",
+            "properties": {
+              "phone": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              }
+            }
+          },
+          "alternatives": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "code"
+              ]
+            }
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "ReservationCreated": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "confirmed"
+            ]
+          },
+          "party_size": {
+            "type": "integer"
+          },
+          "starts_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reference",
+          "status",
+          "party_size",
+          "starts_at"
+        ]
+      }
+    },
+    "parameters": {}
+  },
+  "paths": {
+    "/api/health": {
+      "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Is online booking usable right now?",
+        "description": "Answers from a short cache; the database is only touched when this is called and the cached answer is old. Never returns internal details. `request_only` means the website should offer \"request a booking\" instead of live booking.",
+        "responses": {
+          "200": {
+            "description": "The API is up.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/availability": {
+      "get": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Bookable start times for a date and party size",
+        "description": "Only times are returned (never tables or counts). The booking itself re-checks everything.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+              "example": "2026-12-04"
+            },
+            "required": true,
+            "name": "date",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 99,
+              "example": 2
+            },
+            "required": true,
+            "name": "party",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Slots (possibly none).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Availability"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid date/party, party not allowed, or date outside the booking window.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Booking rules not configured, or the database is unavailable (`fallback: \"request\"`).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reservations": {
+      "post": {
+        "tags": [
+          "Public"
+        ],
+        "summary": "Request a table",
+        "description": "Creates a booking in the database. `201` means it is saved (status `pending` until the owner confirms, unless the owner enabled auto-confirm). Send the same `Idempotency-Key` when retrying: a repeat of the same request returns the same booking, never a second one. If the database cannot be reached the answer is `503` with `fallback: \"request\"`; a booking is never reported as saved unless it was committed.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{16,128}$",
+              "example": "b3a1f0e2-7c64-4e0f-9d55-2f6f1d1a7c11"
+            },
+            "required": true,
+            "name": "idempotency-key",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "party_size": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 99,
+                    "example": 2
+                  },
+                  "starts_at": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2026-12-04T19:00:00+02:00"
+                  },
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100,
+                    "pattern": "^[^\\u0000-\\u001f\\u007f]*$",
+                    "example": "Test Guest"
+                  },
+                  "email": {
+                    "type": "string",
+                    "maxLength": 254,
+                    "format": "email",
+                    "example": "guest@example.com"
+                  },
+                  "phone": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "enum": [
+                          ""
+                        ]
+                      },
+                      {
+                        "type": "string",
+                        "pattern": "^[0-9+() -]{5,30}$"
+                      }
+                    ],
+                    "example": "+27 82 000 0000"
+                  },
+                  "notes": {
+                    "type": "string",
+                    "minLength": 0,
+                    "maxLength": 500,
+                    "pattern": "^[^\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$",
+                    "example": "Window seat please"
+                  },
+                  "consent": {
+                    "type": "boolean",
+                    "enum": [
+                      true
+                    ],
+                    "description": "The guest agreed to the privacy notice."
+                  }
+                },
+                "required": [
+                  "party_size",
+                  "starts_at",
+                  "name",
+                  "consent"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Saved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationCreated"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "No table available (nearby `alternatives` when known) or the idempotency key was used for a different request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Body larger than 16 KB.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Not application/json.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed or a booking rule was not met.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Booking unavailable (`fallback: \"request\"`), not configured, or outcome unknown (retry with the same key).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "webhooks": {}
+}

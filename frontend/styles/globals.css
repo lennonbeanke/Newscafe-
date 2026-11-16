@@ -11,6 +11,8 @@
   --color-gold: #c9a45c;
   --color-gold-light: #ecd39a;
   --color-gold-deep: #8d6d2f;
+  --color-ok: #6ee7b7;
+  --color-danger: #f87171;
 
   --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
   --animate-marquee: marquee 40s linear infinite;
@@ -105,6 +107,61 @@ html[data-theme="light"] {
   color: var(--color-bone);
   color-scheme: dark;
 }
+/*
+ * OWNER AREA colour sets (Stage 1 of the dashboard redesign). Applied only while /admin is open: it sets data-admin-theme on <html>
+ * (inline script + OwnerThemeProvider) and removes it on leaving, so the public website keeps its own look. These re-point the same
+ * variables every owner component already reads, so cards, tables, forms and menus follow the theme without per-component colours.
+ * Light follows the approved design (cream page, white cards, gold / green / charcoal accents). Dark is a comfortable warm charcoal.
+ * Text colours were chosen for at least 4.5:1 contrast on their backgrounds.
+ */
+html[data-admin-theme="light"], html[data-admin-theme="dark"] {
+  /* the sidebar is dark charcoal in BOTH themes, as in the design */
+  --nav-bg: #1f1c19;
+  --nav-raise: #2a2622;
+  --nav-text: #f0e9db;
+  --nav-mute: #a99f8f;
+  --nav-faint: #8d8475;
+  --nav-gold: #dcb56b;
+  --nav-line: rgba(240, 233, 219, 0.12);
+  --nav-active: rgba(220, 181, 107, 0.16);
+}
+html[data-admin-theme="light"] {
+  --color-ink: #f7f2e8;          /* page */
+  --color-coal: #f1eadc;         /* page behind panels */
+  --color-onyx: #ffffff;         /* cards, header */
+  --color-smoke: #ebe3d2;        /* subtle fills */
+  --color-line: rgba(52, 41, 24, 0.14);
+  --color-bone: #26211a;         /* main text: charcoal */
+  --color-mist: #6a6154;         /* secondary text */
+  --color-gold: #8a6212;         /* gold as text and buttons (5.5:1 on white) */
+  --color-gold-light: #6f4e0e;
+  --color-gold-deep: #5a3f09;
+  --color-ok: #1f7a4d;           /* green */
+  --color-danger: #b42318;
+  --sheet-shadow: rgba(70, 45, 10, 0.22);
+  color-scheme: light;
+}
+html[data-admin-theme="dark"] {
+  --color-ink: #151311;
+  --color-coal: #1a1815;
+  --color-onyx: #221f1b;
+  --color-smoke: #2d2a25;
+  --color-line: rgba(240, 233, 219, 0.13);
+  --color-bone: #f1ebdf;
+  --color-mist: #b3ab9d;
+  --color-gold: #d6b062;
+  --color-gold-light: #ecd39a;
+  --color-gold-deep: #a8843c;
+  --color-ok: #6fd3a0;
+  --color-danger: #f4877f;
+  --sheet-shadow: rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
+/* Owner Light | Dark switch: the active mode follows <html data-admin-theme>, so it is right before any JS runs */
+.owner-toggle-btn { color: var(--color-mist); }
+.owner-toggle-btn:hover { color: var(--color-bone); }
+html[data-admin-theme="light"] .owner-toggle-btn[data-mode="light"],
+html[data-admin-theme="dark"] .owner-toggle-btn[data-mode="dark"] { background: var(--color-gold); color: var(--color-ink); }
 /* Sun | Moon switch: the active mode follows <html data-theme>, so it is right before any JS runs */
 .theme-btn { color: var(--color-mist); }
 .theme-btn:hover { color: var(--color-bone); }

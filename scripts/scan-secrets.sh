@@ -4,7 +4,7 @@
 # The files are copied to a temporary folder INSIDE the project (the container VM only shares the home folder),
 # mounted read-only, and deleted afterwards. The scan FAILS if gitleaks saw no data, so it can never pass silently.
 set -euo pipefail
-. "$(dirname "$0")/lib/common.sh"
+. "$(dirname "$0")/lib/docker-guard.sh"
 need_docker   # refuses redirected/non-Colima engines; the secret scan cannot be skipped (start with scripts/colima-up.sh)
 TOP="$(git rev-parse --show-toplevel)"
 TMP="$(mktemp -d "$TOP/.scan.XXXXXX")"; trap 'rm -rf "$TMP"' EXIT
@@ -13,8 +13,8 @@ if [ "${1:-}" = "--tracked" ]; then git archive HEAD | tar -x -C "$TMP"      # e
 else git checkout-index --all --prefix="$TMP/"; fi                           # exactly what is staged
 EXPECTED="$(find "$TMP" -type f | wc -l | tr -d ' ')"
 [ "$EXPECTED" -gt 0 ] || die "Nothing to scan."
-set +e
-OUT="$(docker run --rm -v "$TMP:/scan:ro" "$GITLEAKS_IMAGE" dir /scan --no-banner --redact --exit-code 1 2>&1)"
+set +e   # MSYS_NO_PATHCONV below: Git Bash on Windows would otherwise rewrite the container path /scan
+OUT="$(MSYS_NO_PATHCONV=1 docker run --rm -v "$TMP:/scan:ro" "$GITLEAKS_IMAGE" dir /scan --no-banner --redact --exit-code 1 2>&1)"
 RC=$?
 set -e
 echo "$OUT" | sed 's/\x1b\[[0-9;]*m//g' | grep -E "scanned|leaks|Finding|RuleID|File:" | head -20

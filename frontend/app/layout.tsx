@@ -3,8 +3,7 @@ import { Cormorant_Garamond, Manrope } from "next/font/google";
 import type { ReactNode } from "react";
 import "@/styles/globals.css";
 import { site } from "@/lib/site";
-import { TransitionProvider } from "@/components/providers/TransitionProvider";
-import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import { SiteShell } from "@/components/providers/SiteShell";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { DesktopFx } from "@/components/ui/DesktopFx";
@@ -98,22 +97,17 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <JsonLd data={organizationSchema} />
         <DistortDefs />
         <MotionProvider>
-          <TransitionProvider>
-            <SmoothScroll>
-              <a
-                href="#main"
-                className="fixed left-4 top-4 z-[200] -translate-y-24 rounded-full bg-gold px-5 py-3 text-xs font-bold uppercase tracking-widest text-ink focus:translate-y-0"
-              >
-                Skip to content
-              </a>
-              <Navbar />
-              <main id="main">{children}</main>
+          <SiteShell
+            navbar={<Navbar />}
+            footer={
               <LazyHydrate id="footer" minHeight="70svh" margin="60% 0px">
                 <Footer />
               </LazyHydrate>
-              <DesktopFx />
-            </SmoothScroll>
-          </TransitionProvider>
+            }
+            effects={<DesktopFx />}
+          >
+            {children}
+          </SiteShell>
         </MotionProvider>
       </body>
     </html>

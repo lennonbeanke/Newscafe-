@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180" role="img" aria-label="Coffee cup (placeholder picture)">
+  <!-- Neutral placeholder drawing, not a photograph. Replace this file with the real coffee-cup picture (same name, or change the path in AdminShell). -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a322a"/><stop offset="1" stop-color="#26211c"/></linearGradient>
+  </defs>
+  <rect width="320" height="180" fill="url(#bg)"/>
+  <g fill="none" stroke="#dcb56b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M112 84h104v26a40 40 0 0 1-40 40h-24a40 40 0 0 1-40-40z"/>
+    <path d="M216 94h12a16 16 0 0 1 0 32h-16"/>
+    <path d="M96 158h136" stroke-opacity="0.7"/>
+    <path d="M142 70c-8-9 8-14 0-24M166 70c-8-9 8-14 0-24M190 70c-8-9 8-14 0-24" stroke-opacity="0.65" stroke-width="2.5"/>
+  </g>
+</svg>

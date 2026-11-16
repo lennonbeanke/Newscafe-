@@ -62,3 +62,21 @@ and JSON-LD (`Restaurant`, `Menu`, `Event`).
 - The contact form has no backend: it opens a pre-filled email to the address in `lib/site.ts`.
   Wire it to a form service if you want server-side submissions.
 - The map is an OpenStreetMap embed recoloured with a CSS filter to match the dark theme.
+
+## Owner dashboard (`/admin`)
+
+The owner area is a private tool inside the same Next.js app: sign-in with e-mail address and password only (no authenticator, by the owner's decision), then the dashboard. It talks to the backend **only over HTTP** (`/api/admin/*`, forwarded in development by `next.config.ts` to the owner API on `127.0.0.1:8788`) and holds no secrets, environment files or backend code. Open it as `http://localhost:3000/admin` (not `127.0.0.1`).
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | Development server on `http://localhost:3000` |
+| `npm run lint` · `npm run typecheck` | ESLint · TypeScript |
+| `npm test` | Unit and static security tests (Node 24, no extra packages) |
+| `npm run test:ui` | Dashboard overview in headless Edge with committed FAKE API answers (`tests/fixtures/`); needs only the dev server |
+| `npm run test:ui:reservations` | Reservation list, booking page, status changes, edit and move in headless Edge against a stateful FAKE API |
+| `npm run test:ui:login` | Sign-in screen and session handling in headless Edge against a FAKE API |
+| `npm run test:ui:shell` | Owner shell: Light/Dark colour sets, charcoal sidebar, responsive layout, keyboard, contrast (headless Edge, FAKE API) |
+
+**Look and theme.** The owner area has its own Light and Dark colour sets (`styles/globals.css`, `html[data-admin-theme]`), applied only while `/admin` is open; the public site keeps its own. Light is the default and follows the approved design; the visible Light | Dark switch is in the top bar. The choice is remembered in the browser under one key, `nc-owner-theme`, holding only the word `light` or `dark` (nothing else from the owner area is ever stored; `lib/owner-theme.ts` is the one module allowed to touch storage, and a test pins that down). A tiny inline script in `app/admin/layout.tsx` applies it before first paint, so there is no flash. The logo (`public/admin/news-cafe-logo.svg`) and coffee-cup picture (`public/admin/coffee-cup-placeholder.svg`) are placeholders: replace those files with the real artwork, keeping the names.
+
+Code: `app/admin/`, `components/admin/`, `lib/admin/`. Tests: `tests/unit/`, `tests/ui/`, `tests/fixtures/`. Tests that need the backend as well are in the repository's `e2e/` folder.

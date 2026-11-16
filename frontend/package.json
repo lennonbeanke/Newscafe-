@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"tests/unit/*.test.mjs\"",
+    "test:ui": "node tests/ui/dashboard.ui.mjs",
+    "test:ui:reservations": "node tests/ui/reservations.ui.mjs",
+    "test:ui:login": "node tests/ui/login.ui.mjs",
+    "test:ui:shell": "node tests/ui/owner-shell.ui.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

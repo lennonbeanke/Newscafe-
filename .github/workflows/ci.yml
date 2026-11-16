@@ -12,15 +12,16 @@ permissions:
 
 jobs:
   repo-safety:
-    name: Repository safety (allow-list, PDFs, secrets)
+    name: Repository safety (allow-list, boundaries, PDFs, secrets)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - run: scripts/check-repo.sh --tracked
+      - run: scripts/check-boundaries.sh
       - run: scripts/scan-secrets.sh --tracked
 
   frontend:
-    name: Frontend lint and type-check
+    name: Frontend (lint, type-check, unit tests)
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -34,12 +35,34 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
       - run: npm ci
       - run: npm run lint
-      - run: npx tsc --noEmit
+      - run: npm run typecheck
+      - run: npm test
 
-  database:
-    name: Database migrations and tests (fake data, throw-away container)
+  backend:
+    name: Backend (database and API tests; fake data, throw-away container)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci --ignore-scripts
+      - run: npm run db:up
+      - run: npm run db:test
+      - run: npm test
+
+  e2e-parity:
+    name: Frontend/backend parity (files only, no servers)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: scripts/db-up.sh
-      - run: scripts/db-test.sh
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: (cd backend && npm ci --ignore-scripts)
+      - run: node --test e2e/parity.test.mjs

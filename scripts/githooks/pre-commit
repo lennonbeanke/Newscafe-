@@ -3,4 +3,5 @@
 set -euo pipefail
 TOP="$(git rev-parse --show-toplevel)"
 "$TOP/scripts/check-repo.sh"
+"$TOP/scripts/check-boundaries.sh"
 "$TOP/scripts/scan-secrets.sh"

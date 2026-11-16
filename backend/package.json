@@ -1,0 +1,40 @@
+{
+  "name": "newscafe-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "News Cafe backend: public API, owner (admin) API, authentication, PostgreSQL database and migrations. Local development only.",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "start:public": "node --env-file=.env.public src/server-public.ts",
+    "start:admin": "node --env-file=.env.admin src/server-admin.ts",
+    "dev": "bash scripts/api-dev.sh",
+    "typecheck": "tsc --noEmit",
+    "test": "bash scripts/api-test.sh",
+    "test:vitest": "vitest run",
+    "db:up": "bash scripts/db-up.sh",
+    "db:down": "bash scripts/db-down.sh",
+    "db:reset": "bash scripts/db-reset.sh",
+    "db:migrate": "bash scripts/db-migrate.sh",
+    "db:roles": "bash scripts/db-roles.sh",
+    "db:test": "bash scripts/db-test.sh",
+    "create-owner": "bash scripts/create-owner.sh",
+    "openapi": "node tools/build-openapi.ts --write"
+  },
+  "dependencies": {
+    "@hono/node-server": "2.1.5",
+    "@hono/zod-openapi": "1.6.3",
+    "@node-rs/argon2": "2.2.2",
+    "hono": "4.13.13",
+    "pg": "8.23.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "@types/pg": "8.23.1",
+    "typescript": "5.9.3",
+    "vitest": "5.0.5"
+  }
+}

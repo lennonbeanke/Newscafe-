@@ -25,7 +25,7 @@ The business owns every account, the source code, the database, customer data an
 1. Remove them from GitHub, Cloudflare, Neon and the e-mail provider. 2. Rotate the database password, API keys and tokens they could see. 3. Revoke all admin sessions. 4. Confirm the nightly backup job still runs and the owner still holds the backup key. 5. Update the register above.
 
 ## Handover pack for a new developer
-`README.md`, `docs/SETUP.md`, `docs/DATABASE.md`, `docs/BACKUP-RECOVERY.md`, this register, and the plan documents in `docs/plans/`. Everything needed to rebuild is in the repository plus the owner's offline key and register.
+`README.md`, `backend/docs/SETUP.md`, `backend/docs/DATABASE.md`, `backend/docs/BACKUP-RECOVERY.md`, this register, and the plan documents in `docs/plans/`. Everything needed to rebuild is in the repository plus the owner's offline key and register.
 
 ## Costs
 No paid subscription, card, automatic billing or purchase exists or may be created without the owner's explicit written approval. If any provider asks for a card or payment, work stops and the owner decides.

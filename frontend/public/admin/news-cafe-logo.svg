@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="64" viewBox="0 0 220 64" role="img" aria-label="News Cafe">
+  <!-- Placeholder text logo. Replace this file with the real logo (same name) whenever it is ready. -->
+  <text x="110" y="34" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, 'Times New Roman', serif" font-size="34" font-weight="600" letter-spacing="5" fill="#dcb56b">NEWS</text>
+  <line x1="24" y1="44" x2="86" y2="44" stroke="#dcb56b" stroke-opacity="0.55" stroke-width="1"/>
+  <line x1="134" y1="44" x2="196" y2="44" stroke="#dcb56b" stroke-opacity="0.55" stroke-width="1"/>
+  <text x="110" y="52" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="13" letter-spacing="7" fill="#f0e9db">CAFE</text>
+</svg>

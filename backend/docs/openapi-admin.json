@@ -1,0 +1,1666 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "News Cafe owner (admin) API",
+    "version": "0.1.0",
+    "description": "Milestone A2 (local development only). Owner-only. Sign-in is one step: e-mail address and password (there is no second factor, by the owner decision). Sessions are an HttpOnly SameSite=Strict cookie; every state-changing request must come from the dashboard origin and carry `X-Requested-With: newscafe-admin` and the per-session `X-CSRF-Token` (returned by sign-in and `/me`). Every reservation change records the signed-in owner as the actor and writes its audit record in the same database transaction."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8788",
+      "description": "Local development (separate process from the public API)"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "SignedIn": {
+        "type": "object",
+        "properties": {
+          "signed_in": {
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          },
+          "csrf_token": {
+            "type": "string"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "email",
+              "role"
+            ]
+          },
+          "session_expires_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "signed_in",
+          "csrf_token",
+          "user",
+          "session_expires_at"
+        ]
+      },
+      "AdminError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "request_id": {
+            "type": "string"
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "code"
+              ]
+            }
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ]
+      },
+      "LoginBody": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "maxLength": 254,
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ],
+        "additionalProperties": false
+      },
+      "Me": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "email",
+              "role"
+            ]
+          },
+          "csrf_token": {
+            "type": "string"
+          },
+          "session_expires_at": {
+            "type": "string"
+          },
+          "idle_timeout_seconds": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "user",
+          "csrf_token",
+          "session_expires_at",
+          "idle_timeout_seconds"
+        ]
+      },
+      "ReservationList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          },
+          "has_more": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "items",
+          "has_more"
+        ]
+      },
+      "ReservationOut": {
+        "type": "object",
+        "properties": {
+          "reservation": {
+            "type": "object",
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "reservation"
+        ]
+      },
+      "Rows": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "StaffCreateBody": {
+        "type": "object",
+        "properties": {
+          "party_size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 99
+          },
+          "starts_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 254,
+            "format": "email"
+          },
+          "phone": {
+            "type": "string",
+            "pattern": "^[0-9+() -]{5,30}$"
+          },
+          "notes": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 500,
+            "pattern": "^[^\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "phone",
+              "walk_in",
+              "admin"
+            ]
+          },
+          "is_test": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "party_size",
+          "starts_at",
+          "name",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "CancelBody": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 300,
+            "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MoveBody": {
+        "type": "object",
+        "properties": {
+          "starts_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "party_size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 99
+          },
+          "duration_minutes": {
+            "type": "integer",
+            "minimum": 15,
+            "maximum": 720
+          },
+          "table_id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EditBody": {
+        "type": "object",
+        "properties": {
+          "guest_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+          },
+          "guest_email": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 254,
+            "format": "email"
+          },
+          "guest_phone": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[0-9+() -]{5,30}$"
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 0,
+            "maxLength": 500,
+            "pattern": "^[^\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]*$"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Row": {
+        "type": "object",
+        "properties": {
+          "item": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "item"
+        ]
+      }
+    },
+    "parameters": {}
+  },
+  "paths": {
+    "/api/admin/login": {
+      "post": {
+        "tags": [
+          "Admin sign-in"
+        ],
+        "summary": "Sign in with e-mail and password",
+        "description": "Unknown e-mail, wrong password and locked account all answer the same `401 invalid_credentials` (no way to learn which owners exist). On success the full session cookie (HttpOnly, SameSite=Strict) is set at once and the CSRF token is returned. There is no second step.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Signed in.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignedIn"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Origin / header check failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many attempts.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/logout": {
+      "post": {
+        "tags": [
+          "Admin sign-in"
+        ],
+        "summary": "Sign out (revokes the session on the server)",
+        "responses": {
+          "204": {
+            "description": "Signed out."
+          },
+          "401": {
+            "description": "Not signed in.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "CSRF check failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/me": {
+      "get": {
+        "tags": [
+          "Admin sign-in"
+        ],
+        "summary": "Who am I? (also returns the CSRF token the dashboard must send)",
+        "responses": {
+          "200": {
+            "description": "Signed in.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Me"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not signed in.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/reservations": {
+      "get": {
+        "tags": [
+          "Admin reservations"
+        ],
+        "summary": "List / search reservations",
+        "description": "Filter by local date range, status, free text (name, e-mail, phone, reference). Test bookings are hidden unless `include_test=true`. Contains guest personal data: owner only, never cached.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "required": false,
+            "name": "from",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "required": false,
+            "name": "to",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "pending",
+                "confirmed",
+                "cancelled",
+                "completed",
+                "no_show"
+              ]
+            },
+            "required": false,
+            "name": "status",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100,
+              "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+            },
+            "required": false,
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            },
+            "required": false,
+            "name": "include_test",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50
+            },
+            "required": false,
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 10000,
+              "default": 0
+            },
+            "required": false,
+            "name": "offset",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reservations.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationList"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not signed in.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Admin reservations"
+        ],
+        "summary": "Staff booking (phone / walk-in / admin)",
+        "description": "Confirmed immediately. May use walk-in-only tables; not bound by notice or opening hours. `is_test: true` marks a test booking. Optional `Idempotency-Key` header.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaffCreateBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationOut"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not signed in.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "CSRF check failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "No table / not configured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/reservations/{id}": {
+      "get": {
+        "tags": [
+          "Admin reservations"
+        ],
+        "summary": "One reservation (viewing guest details is audited)",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The reservation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationOut"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not signed in.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Admin reservations"
+        ],
+        "summary": "Edit guest name, e-mail, phone or notes (nothing else)",
+        "description": "Times, party size, tables and status change only through their own endpoints. `null` clears an e-mail / phone / notes (one contact method must remain).",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationOut"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not signed in.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "CSRF check failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/reservations/{id}/history": {
+      "get": {
+        "tags": [
+          "Admin reservations"
+        ],
+        "summary": "Full change history of a reservation (append-only)",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "History, oldest first.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rows"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not signed in.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/reservations/{id}/confirm": {
+      "post": {
+        "tags": [
+          "Admin reservations"
+        ],
+        "summary": "Confirm a pending reservation",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated reservation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationOut"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not signed in.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "CSRF check failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Status change not allowed, or the table is no longer free.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/reservations/{id}/cancel": {
+      "post": {
+        "tags": [
+          "Admin reservations"
+        ],
+        "summary": "Cancel a reservation (optional reason); releases the table",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated reservation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationOut"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not signed in.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "CSRF check failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Status change not allowed, or the table is no longer free.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/reservations/{id}/complete": {
+      "post": {
+        "tags": [
+          "Admin reservations"
+        ],
+        "summary": "Mark a confirmed reservation completed",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated reservation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationOut"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not signed in.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "CSRF check failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Status change not allowed, or the table is no longer free.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/reservations/{id}/no-show": {
+      "post": {
+        "tags": [
+          "Admin reservations"
+        ],
+        "summary": "Mark a confirmed reservation as a no-show; releases the table",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated reservation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationOut"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not signed in.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "CSRF check failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Status change not allowed, or the table is no longer free.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/reservations/{id}/reinstate": {
+      "post": {
+        "tags": [
+          "Admin reservations"
+        ],
+        "summary": "Bring back a cancelled / no-show reservation (re-checks the table)",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated reservation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationOut"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not signed in.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "CSRF check failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Status change not allowed, or the table is no longer free.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/reservations/{id}/move": {
+      "post": {
+        "tags": [
+          "Admin reservations"
+        ],
+        "summary": "Move: time, party size, duration and/or table (atomic)",
+        "description": "All or nothing: if the new time/table is not free, nothing changes. A changed party size without an explicit duration re-applies the owner's duration rules.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MoveBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Moved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationOut"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not signed in.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "CSRF check failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "No table free / status does not allow a move.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/audit-log": {
+      "get": {
+        "tags": [
+          "Admin audit"
+        ],
+        "summary": "Audit log (read-only, newest first)",
+        "description": "Who did what and when. Never contains guest names, e-mails, phones or notes. Page backwards with `before=<id of the oldest row you have>`.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            },
+            "required": false,
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0
+            },
+            "required": false,
+            "name": "before",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Audit rows.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rows"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not signed in.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/readiness": {
+      "get": {
+        "tags": [
+          "Admin audit"
+        ],
+        "summary": "What is still missing before online booking can be switched on",
+        "responses": {
+          "200": {
+            "description": "Readiness checklist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Row"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not signed in.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/tables": {
+      "get": {
+        "tags": [
+          "Admin reservations"
+        ],
+        "summary": "Tables (read-only; for the \"move to table\" picker)",
+        "responses": {
+          "200": {
+            "description": "Tables.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rows"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not signed in.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "webhooks": {}
+}

@@ -1,0 +1,1769 @@
+{
+ "_note": "FAKE development data only (placeholder cafe, @example.invalid addresses, 'Test Guest' names). Shapes copied from the owner API's own queries. Regenerate with: node e2e/gen-ui-fixtures.mjs",
+ "reservations": [
+  {
+   "id": "0bb2f3af-be23-4dfc-aadf-708949f9e3bd",
+   "reference": "7DD7EEDF",
+   "status": "confirmed",
+   "party_size": 3,
+   "starts_at": "2026-11-13T16:30:00+00:00",
+   "ends_at": "2026-11-13T18:00:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 021",
+   "guest_email": "test.guest.021@example.invalid",
+   "guest_phone": "+27 00 000 0021",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T22"
+   ]
+  },
+  {
+   "id": "a4da9b66-1347-40dd-a7dc-98f3c2d63e04",
+   "reference": "76BB336C",
+   "status": "confirmed",
+   "party_size": 4,
+   "starts_at": "2026-11-13T17:00:00+00:00",
+   "ends_at": "2026-11-13T18:30:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 007",
+   "guest_email": "test.guest.007@example.invalid",
+   "guest_phone": "+27 00 000 0007",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T21"
+   ]
+  },
+  {
+   "id": "c2823da8-0e65-4440-ae8d-58bb52a08823",
+   "reference": "0A636482",
+   "status": "confirmed",
+   "party_size": 5,
+   "starts_at": "2026-11-13T17:30:00+00:00",
+   "ends_at": "2026-11-13T19:00:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 028",
+   "guest_email": "test.guest.028@example.invalid",
+   "guest_phone": "+27 00 000 0028",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T36"
+   ]
+  },
+  {
+   "id": "b7d43f3d-548a-4bca-9563-228489ab560f",
+   "reference": "8C2DAF44",
+   "status": "confirmed",
+   "party_size": 6,
+   "starts_at": "2026-11-13T18:00:00+00:00",
+   "ends_at": "2026-11-13T19:30:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 014",
+   "guest_email": "test.guest.014@example.invalid",
+   "guest_phone": "+27 00 000 0014",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T35"
+   ]
+  },
+  {
+   "id": "394bef21-4067-4076-ba2c-603c564b0d1e",
+   "reference": "9CE13AFB",
+   "status": "confirmed",
+   "party_size": 2,
+   "starts_at": "2026-11-14T16:00:00+00:00",
+   "ends_at": "2026-11-14T17:00:00+00:00",
+   "duration_minutes": 60,
+   "guest_name": "Test Guest 015",
+   "guest_email": "test.guest.015@example.invalid",
+   "guest_phone": "+27 00 000 0015",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T01"
+   ]
+  },
+  {
+   "id": "de890861-7651-4bcd-b45f-9032c41bb7d9",
+   "reference": "645D5D2C",
+   "status": "confirmed",
+   "party_size": 3,
+   "starts_at": "2026-11-14T16:30:00+00:00",
+   "ends_at": "2026-11-14T18:00:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 001",
+   "guest_email": "test.guest.001@example.invalid",
+   "guest_phone": "+27 00 000 0001",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T21"
+   ]
+  },
+  {
+   "id": "b28fcee1-54d4-4011-8333-d21bf84fa450",
+   "reference": "CADB98F7",
+   "status": "confirmed",
+   "party_size": 4,
+   "starts_at": "2026-11-14T17:00:00+00:00",
+   "ends_at": "2026-11-14T18:30:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 022",
+   "guest_email": "test.guest.022@example.invalid",
+   "guest_phone": "+27 00 000 0022",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T22"
+   ]
+  },
+  {
+   "id": "5a689220-65ef-4c64-a905-770a6fd9171f",
+   "reference": "9AFD5502",
+   "status": "confirmed",
+   "party_size": 5,
+   "starts_at": "2026-11-14T17:30:00+00:00",
+   "ends_at": "2026-11-14T19:00:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 008",
+   "guest_email": "test.guest.008@example.invalid",
+   "guest_phone": "+27 00 000 0008",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T35"
+   ]
+  },
+  {
+   "id": "119c97fc-230e-4f82-8736-54bfdeb9e741",
+   "reference": "C07B8AD1",
+   "status": "confirmed",
+   "party_size": 6,
+   "starts_at": "2026-11-14T18:00:00+00:00",
+   "ends_at": "2026-11-14T19:30:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 029",
+   "guest_email": "test.guest.029@example.invalid",
+   "guest_phone": "+27 00 000 0029",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T36"
+   ]
+  },
+  {
+   "id": "5d0a69b4-7f80-47b4-8ad5-78dcf0751b1f",
+   "reference": "6B94CB7E",
+   "status": "confirmed",
+   "party_size": 2,
+   "starts_at": "2026-11-15T16:00:00+00:00",
+   "ends_at": "2026-11-15T17:00:00+00:00",
+   "duration_minutes": 60,
+   "guest_name": "Test Guest 030",
+   "guest_email": "test.guest.030@example.invalid",
+   "guest_phone": "+27 00 000 0030",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T01"
+   ]
+  },
+  {
+   "id": "70351eb6-8eea-4cfb-ae6c-c349e2940ca3",
+   "reference": "6BF5001C",
+   "status": "confirmed",
+   "party_size": 3,
+   "starts_at": "2026-11-15T16:30:00+00:00",
+   "ends_at": "2026-11-15T18:00:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 016",
+   "guest_email": "test.guest.016@example.invalid",
+   "guest_phone": "+27 00 000 0016",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T22"
+   ]
+  },
+  {
+   "id": "4cad34b0-faba-465c-ac12-d48d235b1bf5",
+   "reference": "6767D661",
+   "status": "confirmed",
+   "party_size": 4,
+   "starts_at": "2026-11-15T17:00:00+00:00",
+   "ends_at": "2026-11-15T18:30:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 002",
+   "guest_email": "test.guest.002@example.invalid",
+   "guest_phone": "+27 00 000 0002",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T21"
+   ]
+  },
+  {
+   "id": "30362379-1b16-40b0-9fd3-ad6c701c708c",
+   "reference": "5CBBE11F",
+   "status": "confirmed",
+   "party_size": 5,
+   "starts_at": "2026-11-15T17:30:00+00:00",
+   "ends_at": "2026-11-15T19:00:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 023",
+   "guest_email": "test.guest.023@example.invalid",
+   "guest_phone": "+27 00 000 0023",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T36"
+   ]
+  },
+  {
+   "id": "e633baba-0765-4fe2-9e8f-9e6c86a32251",
+   "reference": "D7B67AD5",
+   "status": "confirmed",
+   "party_size": 6,
+   "starts_at": "2026-11-15T18:00:00+00:00",
+   "ends_at": "2026-11-15T19:30:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 009",
+   "guest_email": "test.guest.009@example.invalid",
+   "guest_phone": "+27 00 000 0009",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T35"
+   ]
+  },
+  {
+   "id": "091ffdfe-f0be-4d01-b462-a50a0dc21245",
+   "reference": "5EEC8F03",
+   "status": "confirmed",
+   "party_size": 2,
+   "starts_at": "2026-11-16T16:00:00+00:00",
+   "ends_at": "2026-11-16T17:00:00+00:00",
+   "duration_minutes": 60,
+   "guest_name": "Test Guest 010",
+   "guest_email": "test.guest.010@example.invalid",
+   "guest_phone": "+27 00 000 0010",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T01"
+   ]
+  },
+  {
+   "id": "364b4b1c-e726-4d4d-b8e8-b2594c6ef91a",
+   "reference": "F0B56129",
+   "status": "confirmed",
+   "party_size": 4,
+   "starts_at": "2026-11-16T17:00:00+00:00",
+   "ends_at": "2026-11-16T18:30:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 017",
+   "guest_email": "test.guest.017@example.invalid",
+   "guest_phone": "+27 00 000 0017",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T21"
+   ]
+  },
+  {
+   "id": "c4dbefe2-e518-45bd-8ba3-9ba99f2b9135",
+   "reference": "F45F191D",
+   "status": "confirmed",
+   "party_size": 5,
+   "starts_at": "2026-11-16T17:30:00+00:00",
+   "ends_at": "2026-11-16T19:00:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 003",
+   "guest_email": "test.guest.003@example.invalid",
+   "guest_phone": "+27 00 000 0003",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T35"
+   ]
+  },
+  {
+   "id": "9a27ec59-8d35-4301-bf55-42a0e10b91d9",
+   "reference": "ABD93AEF",
+   "status": "confirmed",
+   "party_size": 6,
+   "starts_at": "2026-11-16T18:00:00+00:00",
+   "ends_at": "2026-11-16T19:30:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 024",
+   "guest_email": "test.guest.024@example.invalid",
+   "guest_phone": "+27 00 000 0024",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T36"
+   ]
+  },
+  {
+   "id": "5d0196b4-79a4-49b1-a50e-fed723b1d1b6",
+   "reference": "F1B91F91",
+   "status": "confirmed",
+   "party_size": 2,
+   "starts_at": "2026-11-17T16:00:00+00:00",
+   "ends_at": "2026-11-17T17:00:00+00:00",
+   "duration_minutes": 60,
+   "guest_name": "Test Guest 025",
+   "guest_email": "test.guest.025@example.invalid",
+   "guest_phone": "+27 00 000 0025",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T01"
+   ]
+  },
+  {
+   "id": "88ef5fb7-6d2f-44c8-b108-9692761a6c55",
+   "reference": "0006C578",
+   "status": "confirmed",
+   "party_size": 3,
+   "starts_at": "2026-11-17T16:30:00+00:00",
+   "ends_at": "2026-11-17T18:00:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 011",
+   "guest_email": "test.guest.011@example.invalid",
+   "guest_phone": "+27 00 000 0011",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T21"
+   ]
+  },
+  {
+   "id": "022b1fd1-d98e-4dc9-8bad-da65522a64f7",
+   "reference": "040C7D15",
+   "status": "confirmed",
+   "party_size": 5,
+   "starts_at": "2026-11-17T17:30:00+00:00",
+   "ends_at": "2026-11-17T19:00:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 018",
+   "guest_email": "test.guest.018@example.invalid",
+   "guest_phone": "+27 00 000 0018",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T36"
+   ]
+  },
+  {
+   "id": "9a754446-f768-4ce0-9645-07f810918f92",
+   "reference": "4B5AEA72",
+   "status": "confirmed",
+   "party_size": 6,
+   "starts_at": "2026-11-17T18:00:00+00:00",
+   "ends_at": "2026-11-17T19:30:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 004",
+   "guest_email": "test.guest.004@example.invalid",
+   "guest_phone": "+27 00 000 0004",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T35"
+   ]
+  },
+  {
+   "id": "ce667d74-d8fb-4821-bf5e-802584b2cdb5",
+   "reference": "5E57ED4B",
+   "status": "confirmed",
+   "party_size": 2,
+   "starts_at": "2026-11-18T16:00:00+00:00",
+   "ends_at": "2026-11-18T17:00:00+00:00",
+   "duration_minutes": 60,
+   "guest_name": "Test Guest 005",
+   "guest_email": "test.guest.005@example.invalid",
+   "guest_phone": "+27 00 000 0005",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T01"
+   ]
+  },
+  {
+   "id": "376db43c-4090-4bab-b24d-cb18d7be4be7",
+   "reference": "A2E1E78E",
+   "status": "confirmed",
+   "party_size": 3,
+   "starts_at": "2026-11-18T16:30:00+00:00",
+   "ends_at": "2026-11-18T18:00:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 026",
+   "guest_email": "test.guest.026@example.invalid",
+   "guest_phone": "+27 00 000 0026",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T22"
+   ]
+  },
+  {
+   "id": "50be6918-200d-4e39-844c-2b7ad4975b6d",
+   "reference": "3059B628",
+   "status": "confirmed",
+   "party_size": 4,
+   "starts_at": "2026-11-18T17:00:00+00:00",
+   "ends_at": "2026-11-18T18:30:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 012",
+   "guest_email": "test.guest.012@example.invalid",
+   "guest_phone": "+27 00 000 0012",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T21"
+   ]
+  },
+  {
+   "id": "20b03a25-61a2-46a3-b07b-479d26f7d94b",
+   "reference": "15C0B63B",
+   "status": "confirmed",
+   "party_size": 6,
+   "starts_at": "2026-11-18T18:00:00+00:00",
+   "ends_at": "2026-11-18T19:30:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 019",
+   "guest_email": "test.guest.019@example.invalid",
+   "guest_phone": "+27 00 000 0019",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T35"
+   ]
+  },
+  {
+   "id": "898a7373-63cf-49c1-8d3f-1c6460ee6e75",
+   "reference": "1B915D09",
+   "status": "confirmed",
+   "party_size": 2,
+   "starts_at": "2026-11-19T16:00:00+00:00",
+   "ends_at": "2026-11-19T17:00:00+00:00",
+   "duration_minutes": 60,
+   "guest_name": "Test Guest 020",
+   "guest_email": "test.guest.020@example.invalid",
+   "guest_phone": "+27 00 000 0020",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T01"
+   ]
+  },
+  {
+   "id": "56e7d06b-d020-4cce-acca-8ae821f0fab2",
+   "reference": "8774CA36",
+   "status": "confirmed",
+   "party_size": 3,
+   "starts_at": "2026-11-19T16:30:00+00:00",
+   "ends_at": "2026-11-19T18:00:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 006",
+   "guest_email": "test.guest.006@example.invalid",
+   "guest_phone": "+27 00 000 0006",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T21"
+   ]
+  },
+  {
+   "id": "6f94110f-560e-4fb9-b325-15dc8b776fb2",
+   "reference": "4AD3CC0B",
+   "status": "confirmed",
+   "party_size": 4,
+   "starts_at": "2026-11-19T17:00:00+00:00",
+   "ends_at": "2026-11-19T18:30:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 027",
+   "guest_email": "test.guest.027@example.invalid",
+   "guest_phone": "+27 00 000 0027",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T22"
+   ]
+  },
+  {
+   "id": "e72013f7-a759-4dbe-9b74-c3a5b55182fa",
+   "reference": "7C59FCC5",
+   "status": "confirmed",
+   "party_size": 5,
+   "starts_at": "2026-11-19T17:30:00+00:00",
+   "ends_at": "2026-11-19T19:00:00+00:00",
+   "duration_minutes": 90,
+   "guest_name": "Test Guest 013",
+   "guest_email": "test.guest.013@example.invalid",
+   "guest_phone": "+27 00 000 0013",
+   "notes": "Fake development booking",
+   "source": "admin",
+   "is_test": true,
+   "consent_at": "2026-11-12T07:36:27.80887+00:00",
+   "created_at": "2026-11-12T07:36:27.80887+00:00",
+   "updated_at": "2026-11-12T07:36:27.80887+00:00",
+   "confirmed_at": "2026-11-12T07:36:27.80887+00:00",
+   "cancelled_at": null,
+   "cancel_reason": null,
+   "tables": [
+    "T35"
+   ]
+  }
+ ],
+ "readiness": {
+  "location_id": "00000000-0000-4000-8000-000000000001",
+  "name": "DEV PLACEHOLDER Cafe",
+  "has_opening_hours": true,
+  "has_tables": true,
+  "has_slot_interval": true,
+  "has_duration_rule": true,
+  "has_booking_limits": true,
+  "auto_confirm_enabled": false,
+  "ready_for_online_requests": true,
+  "ready_for_auto_confirm": true
+ },
+ "tables": [
+  {
+   "id": "28ca428e-e44b-429d-a0ba-7cdc9e0410ef",
+   "label": "T01",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "f92f6906-f0b8-4335-8a7f-3c173738bf5c",
+   "label": "T02",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "bbd97c11-96cb-444e-934b-46d09e892a71",
+   "label": "T03",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "e81fcf69-c29d-4a84-bdd0-d2bd2ebbf7b6",
+   "label": "T04",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "090c8da3-9e65-49d2-83a1-2a2898caa1f4",
+   "label": "T05",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "9c87a2d9-0ab4-4af1-a609-36f54f16f333",
+   "label": "T06",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "ad1d2072-9bbe-4395-97cd-af1984985c31",
+   "label": "T07",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "f09540e1-8c10-4aa2-9d0b-89b4c743000f",
+   "label": "T08",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "3d3058a7-1555-48e7-929a-9595e0508c4a",
+   "label": "T09",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "71c75259-bbbd-4ef6-87ba-0a6bbe3b67be",
+   "label": "T10",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "53a013ca-05cd-4306-92e2-04ea9cea8911",
+   "label": "T11",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "dc3c8664-b2b0-4879-a302-d6f917495ab5",
+   "label": "T12",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "d30656e1-e46f-4242-b415-caea7c065ab0",
+   "label": "T13",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "ea98c764-b7de-4033-84d1-886c9b43f5ab",
+   "label": "T14",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "332793f5-846b-4ced-bd33-84faf81743e8",
+   "label": "T15",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "536e046e-6ac4-44ff-85cb-ad27447ca326",
+   "label": "T16",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "54e09173-5833-4b71-956b-d59cf73d0677",
+   "label": "T17",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "a50b4c77-e5b4-4ff0-bc95-c06de371a23e",
+   "label": "T18",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "ba1b4aba-db89-4524-9739-b60dd0288848",
+   "label": "T19",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "9cf4291a-3b0f-4b71-a000-3566d88cdfd7",
+   "label": "T20",
+   "section": "Window",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "f049560e-1500-4f53-be0b-6a84acd34c0d",
+   "label": "T21",
+   "section": "Main",
+   "min_covers": 2,
+   "max_covers": 4,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "fbd8ade9-bddf-4af3-a008-08c87dbbb064",
+   "label": "T22",
+   "section": "Main",
+   "min_covers": 2,
+   "max_covers": 4,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "5b3ec69d-45b4-4f35-bf07-e376a096f17b",
+   "label": "T23",
+   "section": "Main",
+   "min_covers": 2,
+   "max_covers": 4,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "09ff2b0c-4c23-4fab-8cfb-02d29922ace3",
+   "label": "T24",
+   "section": "Main",
+   "min_covers": 2,
+   "max_covers": 4,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "27557bfa-9084-4c08-b01a-e52f4de98e63",
+   "label": "T25",
+   "section": "Main",
+   "min_covers": 2,
+   "max_covers": 4,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "df62902f-01c1-43eb-aab7-1b659f7d424a",
+   "label": "T26",
+   "section": "Main",
+   "min_covers": 2,
+   "max_covers": 4,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "f9d0879f-8bf7-484e-999d-fc5416af7a78",
+   "label": "T27",
+   "section": "Main",
+   "min_covers": 2,
+   "max_covers": 4,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "4086e440-1655-481c-9ccc-bc47878cbf19",
+   "label": "T28",
+   "section": "Main",
+   "min_covers": 2,
+   "max_covers": 4,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "6fcca1bf-848a-4d2d-8a09-38ac14507ec8",
+   "label": "T29",
+   "section": "Main",
+   "min_covers": 2,
+   "max_covers": 4,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "67581aeb-2ff0-497b-ba84-e48d2fb36431",
+   "label": "T30",
+   "section": "Main",
+   "min_covers": 2,
+   "max_covers": 4,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "8736dbff-a851-40d6-9465-38eaa3b33daf",
+   "label": "T31",
+   "section": "Main",
+   "min_covers": 2,
+   "max_covers": 4,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "045d668b-0a19-4d2e-9046-651fd65fe553",
+   "label": "T32",
+   "section": "Main",
+   "min_covers": 2,
+   "max_covers": 4,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "bebeff0f-b6de-4723-b63c-04ed2367f5d6",
+   "label": "T33",
+   "section": "Main",
+   "min_covers": 2,
+   "max_covers": 4,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "09e4d282-6927-41b1-90db-2a9f8dcd6680",
+   "label": "T34",
+   "section": "Main",
+   "min_covers": 2,
+   "max_covers": 4,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "cecfc5eb-9211-4df7-830a-ff8e1418f5f7",
+   "label": "T35",
+   "section": "Booths",
+   "min_covers": 4,
+   "max_covers": 6,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "49ad889a-bd17-4454-bcc8-f50c7b6add50",
+   "label": "T36",
+   "section": "Booths",
+   "min_covers": 4,
+   "max_covers": 6,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "d3b21c50-cf2a-4416-860a-e86ca982b1a9",
+   "label": "T37",
+   "section": "Booths",
+   "min_covers": 4,
+   "max_covers": 6,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "83348267-4f0e-4077-aed6-1e34937a560e",
+   "label": "T38",
+   "section": "Booths",
+   "min_covers": 4,
+   "max_covers": 6,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "62b7d167-3b49-4de2-a47a-f1572bfd2394",
+   "label": "T39",
+   "section": "Booths",
+   "min_covers": 4,
+   "max_covers": 6,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "739efa34-6a8a-4dfe-bea5-53d482c002f0",
+   "label": "T40",
+   "section": "Booths",
+   "min_covers": 4,
+   "max_covers": 6,
+   "is_active": true,
+   "online_bookable": true
+  },
+  {
+   "id": "dd7c24ec-1bda-4a97-aa20-21aa88eb481e",
+   "label": "T41",
+   "section": "Bar",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": false
+  },
+  {
+   "id": "3e417d46-54ea-4755-85ab-9ded433fff3f",
+   "label": "T42",
+   "section": "Bar",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": false
+  },
+  {
+   "id": "fe17d0ad-90ec-4ac6-b411-d4a3af90b441",
+   "label": "T43",
+   "section": "Bar",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": false
+  },
+  {
+   "id": "a2e5c86e-325f-4ac5-ad02-4dde49063d63",
+   "label": "T44",
+   "section": "Bar",
+   "min_covers": 1,
+   "max_covers": 2,
+   "is_active": true,
+   "online_bookable": false
+  }
+ ],
+ "audit": [
+  {
+   "id": 112,
+   "at": "2026-11-12T15:21:57.205924+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.recovery_code_used",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "recovery_code"
+   }
+  },
+  {
+   "id": 111,
+   "at": "2026-11-12T15:21:57.070893+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.second_factor_failed",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "recovery_code"
+   }
+  },
+  {
+   "id": 110,
+   "at": "2026-11-12T15:21:56.891391+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.password_ok",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "second_factor": "totp"
+   }
+  },
+  {
+   "id": 109,
+   "at": "2026-11-12T15:21:55.840452+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.logout",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": null
+  },
+  {
+   "id": 108,
+   "at": "2026-11-12T15:21:55.58932+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.recovery_code_used",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "recovery_code"
+   }
+  },
+  {
+   "id": 107,
+   "at": "2026-11-12T15:21:55.05999+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.second_factor_failed",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "recovery_code"
+   }
+  },
+  {
+   "id": 106,
+   "at": "2026-11-12T15:21:54.237491+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.password_ok",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "second_factor": "totp"
+   }
+  },
+  {
+   "id": 105,
+   "at": "2026-11-12T15:21:53.537192+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.logout",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": null
+  },
+  {
+   "id": 104,
+   "at": "2026-11-12T15:21:53.27196+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.login",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "totp"
+   }
+  },
+  {
+   "id": 103,
+   "at": "2026-11-12T15:21:53.112869+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.second_factor_failed",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "totp"
+   }
+  },
+  {
+   "id": 102,
+   "at": "2026-11-12T15:21:52.588355+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.second_factor_failed",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "totp"
+   }
+  },
+  {
+   "id": 101,
+   "at": "2026-11-12T15:21:51.804816+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.password_ok",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "second_factor": "totp"
+   }
+  },
+  {
+   "id": 100,
+   "at": "2026-11-12T15:21:49.032245+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.logout",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": null
+  },
+  {
+   "id": 99,
+   "at": "2026-11-12T15:21:46.881313+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.totp_enrolled",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "recovery_codes": 10
+   }
+  },
+  {
+   "id": 98,
+   "at": "2026-11-12T15:21:46.374418+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.second_factor_failed",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "enrol"
+   }
+  },
+  {
+   "id": 97,
+   "at": "2026-11-12T15:21:45.841642+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.password_ok",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "second_factor": "enrol"
+   }
+  },
+  {
+   "id": 96,
+   "at": "2026-11-12T15:21:45.270502+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.login_failed",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "reason": "bad_password"
+   }
+  },
+  {
+   "id": 95,
+   "at": "2026-11-12T15:20:42.811245+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.recovery_code_used",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "recovery_code"
+   }
+  },
+  {
+   "id": 94,
+   "at": "2026-11-12T15:20:42.653909+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.second_factor_failed",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "recovery_code"
+   }
+  },
+  {
+   "id": 93,
+   "at": "2026-11-12T15:20:42.560391+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.password_ok",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "second_factor": "totp"
+   }
+  },
+  {
+   "id": 92,
+   "at": "2026-11-12T15:20:41.759739+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.logout",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": null
+  },
+  {
+   "id": 91,
+   "at": "2026-11-12T15:20:41.611445+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.recovery_code_used",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "recovery_code"
+   }
+  },
+  {
+   "id": 90,
+   "at": "2026-11-12T15:20:41.096346+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.second_factor_failed",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "recovery_code"
+   }
+  },
+  {
+   "id": 89,
+   "at": "2026-11-12T15:20:40.246435+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.password_ok",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "second_factor": "totp"
+   }
+  },
+  {
+   "id": 88,
+   "at": "2026-11-12T15:20:39.553763+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.logout",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": null
+  },
+  {
+   "id": 87,
+   "at": "2026-11-12T15:20:39.302869+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.login",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "totp"
+   }
+  },
+  {
+   "id": 86,
+   "at": "2026-11-12T15:20:39.137612+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.second_factor_failed",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "totp"
+   }
+  },
+  {
+   "id": 85,
+   "at": "2026-11-12T15:20:38.619108+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.second_factor_failed",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "totp"
+   }
+  },
+  {
+   "id": 84,
+   "at": "2026-11-12T15:20:37.787985+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.password_ok",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "second_factor": "totp"
+   }
+  },
+  {
+   "id": 83,
+   "at": "2026-11-12T15:20:35.126119+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.logout",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": null
+  },
+  {
+   "id": 82,
+   "at": "2026-11-12T15:20:32.992904+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.totp_enrolled",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "recovery_codes": 10
+   }
+  },
+  {
+   "id": 81,
+   "at": "2026-11-12T15:20:32.471642+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.second_factor_failed",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "enrol"
+   }
+  },
+  {
+   "id": 80,
+   "at": "2026-11-12T15:20:31.947964+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.password_ok",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "second_factor": "enrol"
+   }
+  },
+  {
+   "id": 79,
+   "at": "2026-11-12T15:20:31.387928+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.login_failed",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "reason": "bad_password"
+   }
+  },
+  {
+   "id": 78,
+   "at": "2026-11-12T15:19:57.468753+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.recovery_code_used",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "recovery_code"
+   }
+  },
+  {
+   "id": 77,
+   "at": "2026-11-12T15:19:57.321863+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.second_factor_failed",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "recovery_code"
+   }
+  },
+  {
+   "id": 76,
+   "at": "2026-11-12T15:19:57.195542+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.password_ok",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "second_factor": "totp"
+   }
+  },
+  {
+   "id": 75,
+   "at": "2026-11-12T15:19:56.478658+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.logout",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": null
+  },
+  {
+   "id": 74,
+   "at": "2026-11-12T15:19:56.222535+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.recovery_code_used",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "recovery_code"
+   }
+  },
+  {
+   "id": 73,
+   "at": "2026-11-12T15:19:55.688119+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.second_factor_failed",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "recovery_code"
+   }
+  },
+  {
+   "id": 72,
+   "at": "2026-11-12T15:19:54.883685+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.password_ok",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "second_factor": "totp"
+   }
+  },
+  {
+   "id": 71,
+   "at": "2026-11-12T15:19:54.192918+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.logout",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": null
+  },
+  {
+   "id": 70,
+   "at": "2026-11-12T15:19:53.948464+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.login",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "totp"
+   }
+  },
+  {
+   "id": 69,
+   "at": "2026-11-12T15:19:53.790904+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.second_factor_failed",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "totp"
+   }
+  },
+  {
+   "id": 68,
+   "at": "2026-11-12T15:19:53.285494+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.second_factor_failed",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "totp"
+   }
+  },
+  {
+   "id": 67,
+   "at": "2026-11-12T15:19:52.498984+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.password_ok",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "second_factor": "totp"
+   }
+  },
+  {
+   "id": 66,
+   "at": "2026-11-12T15:19:49.642843+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.logout",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": null
+  },
+  {
+   "id": 65,
+   "at": "2026-11-12T15:19:47.276937+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.totp_enrolled",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "recovery_codes": 10
+   }
+  },
+  {
+   "id": 64,
+   "at": "2026-11-12T15:19:46.724625+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.second_factor_failed",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "method": "enrol"
+   }
+  },
+  {
+   "id": 63,
+   "at": "2026-11-12T15:19:46.147198+00:00",
+   "actor_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "actor_email": "dev-owner@example.invalid",
+   "action": "auth.password_ok",
+   "entity_type": "admin_user",
+   "entity_id": "8d90175d-c88a-4151-bda1-f77f7de0f30a",
+   "before": null,
+   "after": {
+    "second_factor": "enrol"
+   }
+  }
+ ]
+}
